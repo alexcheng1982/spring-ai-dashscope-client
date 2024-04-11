@@ -6,7 +6,34 @@
 
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
+
+  <name>Aliyun Dashscope Spring AI Client</name>
+  <description>Aliyun Dashscope Spring AI Client</description>
+  <url>https://github.com/JavaAIDev/spring-ai-dashscope-client</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Fu Cheng</name>
+      <email>alexcheng1982@gmail.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>
+      scm:git:git://github.com/JavaAIDev/spring-ai-dashscope-client.git
+    </connection>
+    <developerConnection>
+      scm:git:ssh://github.com:JavaAIDev/spring-ai-dashscope-client.git
+    </developerConnection>
+    <url>http://github.com/JavaAIDev/spring-ai-dashscope-client</url>
+  </scm>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
@@ -39,6 +66,65 @@
       <version>${dashscope-sdk.version}</version>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.4.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>ossrh</publishingServerId>
+          <tokenAuth>true</tokenAuth>
+          <autoPublish>true</autoPublish>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.6.3</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <failOnError>false</failOnError>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
   <repositories>
     <repository>
