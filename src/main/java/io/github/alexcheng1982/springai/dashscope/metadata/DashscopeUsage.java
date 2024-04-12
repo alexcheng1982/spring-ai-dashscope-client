@@ -4,6 +4,9 @@ import com.alibaba.dashscope.aigc.generation.GenerationUsage;
 import java.util.Optional;
 import org.springframework.ai.chat.metadata.Usage;
 
+/**
+ * {@linkplain Usage} implementation of Aliyun Dashscope
+ */
 public class DashscopeUsage implements Usage {
 
   private Long promptTokens;

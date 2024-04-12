@@ -6,7 +6,7 @@
 
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
 
   <name>Aliyun Dashscope Spring AI Client</name>
   <description>Aliyun Dashscope Spring AI Client</description>
@@ -41,6 +41,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <dashscope-sdk.version>2.12.0</dashscope-sdk.version>
     <spring-ai.version>0.8.1</spring-ai.version>
+    <jackson.version>2.14.2</jackson.version>
   </properties>
 
   <dependencyManagement>
@@ -64,6 +65,11 @@
       <groupId>com.alibaba</groupId>
       <artifactId>dashscope-sdk-java</artifactId>
       <version>${dashscope-sdk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
 
     <dependency>
@@ -151,5 +157,27 @@
       </snapshots>
     </repository>
   </repositories>
+
+  <profiles>
+    <profile>
+      <id>native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
+            <configuration>
+              <excludedGroups>dummy</excludedGroups>
+              <groups>native-image</groups>
+              <argLine>
+                -agentlib:native-image-agent=config-output-dir=./target/config-output
+              </argLine>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

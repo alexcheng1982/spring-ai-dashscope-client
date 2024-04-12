@@ -53,6 +53,11 @@ public class DashscopeChatClient extends
   }
 
   public DashscopeChatClient(DashscopeApi dashscopeApi,
+      FunctionCallbackContext functionCallbackContext) {
+    this(dashscopeApi, DEFAULT_OPTIONS, functionCallbackContext);
+  }
+
+  public DashscopeChatClient(DashscopeApi dashscopeApi,
       DashscopeChatOptions options,
       FunctionCallbackContext functionCallbackContext) {
     super(functionCallbackContext);
