@@ -28,7 +28,8 @@
         "name": "<init>",
         "parameterTypes": []
       }
-    ]
+    ],
+    "unsafeAllocated": true
   },
   {
     "name": "com.alibaba.dashscope.aigc.generation.GenerationOutput$Choice",
@@ -38,7 +39,8 @@
         "name": "<init>",
         "parameterTypes": []
       }
-    ]
+    ],
+    "unsafeAllocated": true
   },
   {
     "name": "com.alibaba.dashscope.aigc.generation.GenerationUsage",
@@ -48,7 +50,8 @@
         "name": "<init>",
         "parameterTypes": []
       }
-    ]
+    ],
+    "unsafeAllocated": true
   },
   {
     "name": "com.alibaba.dashscope.tools.FunctionDefinition",
@@ -58,7 +61,8 @@
         "name": "<init>",
         "parameterTypes": []
       }
-    ]
+    ],
+    "unsafeAllocated": true
   },
   {
     "name": "com.alibaba.dashscope.tools.ToolFunction",
@@ -68,7 +72,8 @@
         "name": "<init>",
         "parameterTypes": []
       }
-    ]
+    ],
+    "unsafeAllocated": true
   },
   {
     "name": "com.fasterxml.jackson.databind.ext.Java7HandlersImpl",
@@ -85,27 +90,6 @@
       {
         "name": "<init>",
         "parameterTypes": []
-      }
-    ]
-  },
-  {
-    "name": "com.intellij.junit5.JUnit5IdeaTestRunner",
-    "methods": [
-      {
-        "name": "<init>",
-        "parameterTypes": []
-      }
-    ]
-  },
-  {
-    "name": "com.intellij.rt.execution.application.AppMainV2$Agent",
-    "methods": [
-      {
-        "name": "premain",
-        "parameterTypes": [
-          "java.lang.String",
-          "java.lang.instrument.Instrumentation"
-        ]
       }
     ]
   },
@@ -358,21 +342,6 @@
         "parameterTypes": []
       }
     ]
-  },
-  {
-    "name": "org.apiguardian.api.API",
-    "queryAllPublicMethods": true
-  },
-  {
-    "name": "org.junit.internal.AssumptionViolatedException"
-  },
-  {
-    "name": "org.junit.jupiter.api.Test",
-    "queryAllPublicMethods": true
-  },
-  {
-    "name": "org.junit.platform.commons.annotation.Testable",
-    "queryAllPublicMethods": true
   },
   {
     "name": "sun.misc.Unsafe",

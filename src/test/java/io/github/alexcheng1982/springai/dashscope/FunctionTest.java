@@ -35,7 +35,7 @@ public class FunctionTest {
 
   }
 
-  class AddFunctionTool implements Function<AddRequest, AddResponse> {
+  static class AddFunctionTool implements Function<AddRequest, AddResponse> {
 
     @Override
     public AddResponse apply(AddRequest addRequest) {
