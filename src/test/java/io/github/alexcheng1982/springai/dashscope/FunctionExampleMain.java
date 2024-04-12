@@ -52,7 +52,7 @@ public class FunctionExampleMain {
     }
   }
 
-  void runFunction() {
+  String runFunction() {
     SchemaGeneratorConfigBuilder configBuilder =
         new SchemaGeneratorConfigBuilder(SchemaVersion.DRAFT_2020_12,
             OptionPreset.PLAIN_JSON);
@@ -86,10 +86,10 @@ public class FunctionExampleMain {
             .build());
     var client = new DashscopeChatClient(new DashscopeApi(), context);
     var response = client.call(new Prompt("add 100 to 200", options));
-    System.out.println(response.getResult().getOutput().getContent());
+    return response.getResult().getOutput().getContent();
   }
 
   public static void main(String[] args) {
-    new FunctionExampleMain().runFunction();
+    System.out.println(new FunctionExampleMain().runFunction());
   }
 }
