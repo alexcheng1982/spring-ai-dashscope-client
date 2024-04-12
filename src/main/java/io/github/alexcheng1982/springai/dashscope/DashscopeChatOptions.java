@@ -10,6 +10,11 @@ import org.springframework.ai.model.function.FunctionCallback;
 import org.springframework.ai.model.function.FunctionCallingOptions;
 import org.springframework.util.Assert;
 
+/**
+ * {@linkplain ChatOptions} of Aliyun Dashscope
+ *
+ * @see DashscopeChatClient
+ */
 public class DashscopeChatOptions implements FunctionCallingOptions,
     ChatOptions {
 

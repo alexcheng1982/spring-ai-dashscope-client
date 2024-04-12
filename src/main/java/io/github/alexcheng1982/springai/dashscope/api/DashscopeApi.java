@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Dashscope API
+ */
 public class DashscopeApi {
 
   private final Generation generation;

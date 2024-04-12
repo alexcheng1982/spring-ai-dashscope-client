@@ -30,6 +30,9 @@ import org.springframework.ai.model.function.FunctionCallbackContext;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
+/**
+ * Spring AI {@linkplain ChatClient} for Aliyun Dashscope
+ */
 public class DashscopeChatClient extends
     AbstractFunctionCallSupport<Message, ChatCompletionRequest, GenerationResult> implements
     ChatClient {
@@ -57,6 +60,15 @@ public class DashscopeChatClient extends
     Assert.notNull(options, "Options must not be null");
     this.dashscopeApi = dashscopeApi;
     this.defaultOptions = options;
+  }
+
+  /**
+   * Create a {@linkplain DashscopeChatClient} with default options
+   *
+   * @return A {@linkplain DashscopeChatClient}
+   */
+  public static DashscopeChatClient createDefault() {
+    return new DashscopeChatClient(new DashscopeApi());
   }
 
   @Override

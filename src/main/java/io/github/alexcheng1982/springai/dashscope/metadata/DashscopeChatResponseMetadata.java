@@ -4,6 +4,9 @@ import com.alibaba.dashscope.aigc.generation.GenerationResult;
 import org.springframework.ai.chat.metadata.ChatResponseMetadata;
 import org.springframework.ai.chat.metadata.Usage;
 
+/**
+ * {@linkplain ChatResponseMetadata} implementation of Aliyun Dashscope
+ */
 public class DashscopeChatResponseMetadata implements ChatResponseMetadata {
 
   private final DashscopeUsage usage;
