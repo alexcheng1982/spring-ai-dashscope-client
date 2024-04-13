@@ -171,7 +171,7 @@
               <excludedGroups>dummy</excludedGroups>
               <groups>native-image</groups>
               <argLine>
-                -agentlib:native-image-agent=config-output-dir=./target/config-output
+                -agentlib:native-image-agent=access-filter-file=./src/test/resources/graalvm/agent-filter.json,caller-filter-file=./src/test/resources/graalvm/agent-filter.json,config-output-dir=./target/config-output-{pid}-{datetime}
               </argLine>
             </configuration>
           </plugin>

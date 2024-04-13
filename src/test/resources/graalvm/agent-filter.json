@@ -1,0 +1,22 @@
+{
+  "rules": [
+    {
+      "includeClasses": "io.github.alexcheng1982.springai.dashscope.**"
+    },
+    {
+      "excludeClasses": "sun.security.**"
+    },
+    {
+      "excludeClasses": "java.**"
+    },
+    {
+      "excludeClasses": "sun.**"
+    },
+    {
+      "excludeClasses": "org.junit.**"
+    },
+    {
+      "excludeClasses": "com.fasterxml.jackson.**"
+    }
+  ]
+}
