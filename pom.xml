@@ -6,7 +6,7 @@
 
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client</artifactId>
-  <version>0.4.0</version>
+  <version>0.5.0</version>
 
   <name>Aliyun Dashscope Spring AI Client</name>
   <description>Aliyun Dashscope Spring AI Client</description>
