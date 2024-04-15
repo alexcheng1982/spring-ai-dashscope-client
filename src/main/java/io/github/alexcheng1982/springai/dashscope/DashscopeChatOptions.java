@@ -141,19 +141,7 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   }
 
   public static Builder builder(DashscopeChatOptions prototype) {
-    return new Builder()
-        .withModel(prototype.getModel())
-        .withTopP(prototype.getTopP())
-        .withTopK(prototype.getTopK())
-        .withEnableSearch(prototype.getEnableSearch())
-        .withSeed(prototype.getSeed())
-        .withStops(prototype.getStops())
-        .withTemperature(prototype.getTemperature())
-        .withRepetitionPenalty(prototype.getRepetitionPenalty())
-        .withMaxTokens(prototype.getMaxTokens())
-        .withTools(prototype.getTools())
-        .withFunctionCallbacks(prototype.getFunctionCallbacks())
-        .withFunctions(prototype.getFunctions());
+    return new Builder(prototype);
   }
 
   public static class Builder {
