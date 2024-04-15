@@ -10,7 +10,7 @@
 
   <name>Aliyun Dashscope Spring AI Client</name>
   <description>Aliyun Dashscope Spring AI Client</description>
-  <url>https://github.com/JavaAIDev/spring-ai-dashscope-client</url>
+  <url>https://github.com/alexcheng1982/spring-ai-dashscope-client</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -27,12 +27,12 @@
 
   <scm>
     <connection>
-      scm:git:git://github.com/JavaAIDev/spring-ai-dashscope-client.git
+      scm:git:git://github.com/alexcheng1982/spring-ai-dashscope-client.git
     </connection>
     <developerConnection>
-      scm:git:ssh://github.com:JavaAIDev/spring-ai-dashscope-client.git
+      scm:git:ssh://github.com:alexcheng1982/spring-ai-dashscope-client.git
     </developerConnection>
-    <url>http://github.com/JavaAIDev/spring-ai-dashscope-client</url>
+    <url>http://github.com/alexcheng1982/spring-ai-dashscope-client</url>
   </scm>
 
   <properties>
