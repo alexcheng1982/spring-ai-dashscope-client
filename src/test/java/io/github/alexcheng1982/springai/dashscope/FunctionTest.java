@@ -13,5 +13,6 @@ public class FunctionTest {
   void function() {
     var response = new FunctionExampleMain().runFunction();
     assertNotNull(response);
+    System.out.println(response);
   }
 }
