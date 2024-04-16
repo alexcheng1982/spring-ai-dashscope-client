@@ -7,8 +7,19 @@ Aliyun Dashscope Client for Spring AI
 ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.alexcheng1982/spring-ai-dashscope-client)
 
 
-> A Aliyun Dashscope API key is required. The key is set as environment
+> An Aliyun Dashscope API key is required. The key is set as environment
 > variable `DASHSCOPE_API_KEY`.
+
+Add Maven dependency:
+
+```xml
+
+<dependency>
+  <groupId>io.github.alexcheng1982</groupId>
+  <artifactId>spring-ai-dashscope-client</artifactId>
+  <version>0.5.0</version>
+</dependency>
+```
 
 Usage:
 
