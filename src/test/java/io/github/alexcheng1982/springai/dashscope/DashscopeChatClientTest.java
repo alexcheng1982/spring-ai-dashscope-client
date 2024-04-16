@@ -16,4 +16,11 @@ class DashscopeChatClientTest {
     var response = client.call("hello");
     assertNotNull(response);
   }
+
+  @Test
+  void streamSmokeTest() {
+    var client = DashscopeChatClient.createDefault();
+    var response = client.stream("如何做西红柿炖牛腩？");
+    response.toIterable().forEach(System.out::println);
+  }
 }

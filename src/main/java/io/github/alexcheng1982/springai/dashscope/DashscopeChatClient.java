@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.ChatResponse;
+import org.springframework.ai.chat.StreamingChatClient;
 import org.springframework.ai.chat.messages.MessageType;
 import org.springframework.ai.chat.metadata.ChatGenerationMetadata;
 import org.springframework.ai.chat.prompt.ChatOptions;
@@ -29,13 +30,16 @@ import org.springframework.ai.model.function.FunctionCallback;
 import org.springframework.ai.model.function.FunctionCallbackContext;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
+import reactor.adapter.rxjava.RxJava2Adapter;
+import reactor.core.publisher.Flux;
 
 /**
- * Spring AI {@linkplain ChatClient} for Aliyun Dashscope
+ * Spring AI {@linkplain ChatClient} and {@linkplain StreamingChatClient} for
+ * Aliyun Dashscope
  */
 public class DashscopeChatClient extends
     AbstractFunctionCallSupport<Message, ChatCompletionRequest, GenerationResult> implements
-    ChatClient {
+    ChatClient, StreamingChatClient {
 
   private static final DashscopeChatOptions DEFAULT_OPTIONS = DashscopeChatOptions.builder()
       .withModel(DashscopeModelName.QWEN_MAX)
@@ -79,6 +83,23 @@ public class DashscopeChatClient extends
   @Override
   public ChatResponse call(Prompt prompt) {
     var generationResult = callWithFunctionSupport(createRequest(prompt));
+    return generationResultToChatResponse(generationResult);
+  }
+
+  @Override
+  public Flux<ChatResponse> stream(Prompt prompt) {
+    var request = createRequest(prompt);
+    return RxJava2Adapter.flowableToFlux(
+        dashscopeApi.chatCompletionStream(request.messages(), request.options())
+            .map(result -> {
+              var generationResult = handleFunctionCallOrReturn(request,
+                  result);
+              return generationResultToChatResponse(generationResult);
+            }));
+  }
+
+  private ChatResponse generationResultToChatResponse(
+      GenerationResult generationResult) {
     List<org.springframework.ai.chat.Generation> generations = generationResult.getOutput()
         .getChoices().stream()
         .map(choice -> new org.springframework.ai.chat.Generation(

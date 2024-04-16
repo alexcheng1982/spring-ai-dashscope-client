@@ -3,7 +3,9 @@ package io.github.alexcheng1982.springai.dashscope;
 import com.alibaba.dashscope.embeddings.TextEmbedding;
 import com.alibaba.dashscope.embeddings.TextEmbeddingParam;
 import com.alibaba.dashscope.embeddings.TextEmbeddingParam.TextType;
+import com.alibaba.dashscope.exception.ApiException;
 import com.alibaba.dashscope.exception.NoApiKeyException;
+import io.github.alexcheng1982.springai.dashscope.api.DashscopeApiException;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import java.util.List;
 import org.springframework.ai.document.Document;
@@ -12,6 +14,9 @@ import org.springframework.ai.embedding.EmbeddingClient;
 import org.springframework.ai.embedding.EmbeddingRequest;
 import org.springframework.ai.embedding.EmbeddingResponse;
 
+/**
+ * Spring AI {@linkplain EmbeddingClient} for Aliyun Dashscope
+ */
 public class DashscopeEmbeddingClient implements EmbeddingClient {
 
   @Override
@@ -32,11 +37,12 @@ public class DashscopeEmbeddingClient implements EmbeddingClient {
     TextEmbedding embedding = new TextEmbedding();
     try {
       var result = embedding.call(builder.build());
-      return new EmbeddingResponse(result.getOutput().getEmbeddings().stream().map(item ->
-          new Embedding(item.getEmbedding(), item.getTextIndex())
-      ).toList());
-    } catch (NoApiKeyException e) {
-      throw new RuntimeException(e);
+      return new EmbeddingResponse(
+          result.getOutput().getEmbeddings().stream().map(item ->
+              new Embedding(item.getEmbedding(), item.getTextIndex())
+          ).toList());
+    } catch (ApiException | NoApiKeyException e) {
+      throw new DashscopeApiException(e);
     }
   }
 
