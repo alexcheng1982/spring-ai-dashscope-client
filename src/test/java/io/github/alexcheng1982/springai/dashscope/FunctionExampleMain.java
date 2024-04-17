@@ -68,7 +68,7 @@ public class FunctionExampleMain {
             JsonUtils.parseString(jsonSchema.toString()).getAsJsonObject())
         .build();
     var options = DashscopeChatOptions.builder()
-        .withModel(DashscopeModelName.QWEN_MAX)
+        .withModel(DashscopeModelName.QWEN_PLUS)
         .withTemperature(0.2f)
         .withTools(List.of(
             ToolFunction.builder()

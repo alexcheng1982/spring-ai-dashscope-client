@@ -1,6 +1,7 @@
 package io.github.alexcheng1982.springai.dashscope.metadata;
 
 import com.alibaba.dashscope.aigc.generation.GenerationUsage;
+import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversationUsage;
 import java.util.Optional;
 import org.springframework.ai.chat.metadata.Usage;
 
@@ -18,6 +19,14 @@ public class DashscopeUsage implements Usage {
       this.promptTokens = integerToLong(usage.getInputTokens());
       this.generationTokens = integerToLong(usage.getOutputTokens());
       this.totalTokens = integerToLong(usage.getTotalTokens());
+    }
+  }
+
+  public DashscopeUsage(MultiModalConversationUsage usage) {
+    if (usage != null) {
+      this.promptTokens = integerToLong(usage.getInputTokens());
+      this.generationTokens = integerToLong(usage.getOutputTokens());
+      this.totalTokens = this.promptTokens + this.generationTokens;
     }
   }
 
