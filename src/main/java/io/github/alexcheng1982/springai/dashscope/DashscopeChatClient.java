@@ -42,7 +42,7 @@ public class DashscopeChatClient extends
     ChatClient, StreamingChatClient {
 
   private static final DashscopeChatOptions DEFAULT_OPTIONS = DashscopeChatOptions.builder()
-      .withModel(DashscopeModelName.QWEN_MAX)
+      .withModel(DashscopeModelName.QWEN_TURBO)
       .withTemperature(0.7f).build();
   private final DashscopeChatOptions defaultOptions;
   private final DashscopeApi dashscopeApi;
