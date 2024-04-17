@@ -1,6 +1,7 @@
 package io.github.alexcheng1982.springai.dashscope;
 
 import com.alibaba.dashscope.tools.ToolBase;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,19 +19,29 @@ import org.springframework.util.Assert;
 public class DashscopeChatOptions implements FunctionCallingOptions,
     ChatOptions {
 
+  @JsonProperty("model")
   private String model;
+  @JsonProperty("topP")
   private Float topP;
+  @JsonProperty("topK")
   private Integer topK;
+  @JsonProperty("enableSearch")
   private Boolean enableSearch;
+  @JsonProperty("seed")
   private Integer seed;
+  @JsonProperty("repetitionPenalty")
   private Float repetitionPenalty;
+  @JsonProperty("temperature")
   private Float temperature;
+  @JsonProperty("stops")
   private List<String> stops;
+  @JsonProperty("maxTokens")
   private Integer maxTokens;
   private List<ToolBase> tools;
 
   private List<FunctionCallback> functionCallbacks = new ArrayList<>();
 
+  @JsonProperty("functions")
   private Set<String> functions = new HashSet<>();
 
   public String getModel() {

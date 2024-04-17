@@ -111,7 +111,7 @@ public class DashscopeChatClient extends
         new DashscopeChatResponseMetadata(generationResult));
   }
 
-  private ChatCompletionRequest createRequest(Prompt prompt) {
+  ChatCompletionRequest createRequest(Prompt prompt) {
     Set<String> functionsForThisRequest = new HashSet<>();
 
     List<Message> chatCompletionMessages = toDashscopeMessages(
@@ -124,6 +124,12 @@ public class DashscopeChatClient extends
         options = ModelOptionsUtils.copyToTarget(
             runtimeOptions,
             ChatOptions.class, DashscopeChatOptions.class);
+
+        var copiedDefaultOptions = ModelOptionsUtils.copyToTarget(
+            defaultOptions,
+            ChatOptions.class, DashscopeChatOptions.class);
+        options = ModelOptionsUtils.merge(options, copiedDefaultOptions,
+            DashscopeChatOptions.class);
 
         Set<String> promptEnabledFunctions = this.handleFunctionCallbackConfigurations(
             options,
