@@ -3,12 +3,13 @@ package io.github.alexcheng1982.springai.dashscope;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.util.MimeTypeUtils.IMAGE_JPEG;
 
-import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversation.Models;
+import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.messages.Media;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.util.MimeType;
 
 /**
  * This test requires a Dashscope API key
@@ -31,13 +32,29 @@ class DashscopeChatClientTest {
   }
 
   @Test
-  void multiModalSmokeTest() {
+  void multiModalImageSmokeTest() {
     var client = DashscopeChatClient.createDefault();
-    var prompt = new Prompt(new UserMessage("这是什么?", List.of(
-        new Media(IMAGE_JPEG,
-            "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"))),
+    var prompt = new Prompt(new UserMessage("这是什么?",
+        List.of(
+            new Media(IMAGE_JPEG,
+                "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"))),
         DashscopeChatOptions.builder()
-            .withModel(Models.QWEN_VL_PLUS)
+            .withModel(DashscopeModelName.QWEN_VL_PLUS)
+            .build());
+    var response = client.call(prompt);
+    System.out.println(response.getResult().getOutput().getContent());
+  }
+
+  @Test
+  void multiModalAudioSmokeTest() {
+    var client = DashscopeChatClient.createDefault();
+    var prompt = new Prompt(new UserMessage("这段音频在说什么?",
+        List.of(
+            new Media(new MimeType("audio", "wav"),
+                "https://dashscope.oss-cn-beijing.aliyuncs.com/audios/2channel_16K.wav"))),
+        DashscopeChatOptions.builder()
+            .withModel(DashscopeModelName.QWEN_AUDIO_TURBO)
+            .withMaxTokens(100)
             .build());
     var response = client.call(prompt);
     System.out.println(response.getResult().getOutput().getContent());

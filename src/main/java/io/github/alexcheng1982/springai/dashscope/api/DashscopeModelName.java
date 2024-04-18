@@ -10,6 +10,7 @@ public class DashscopeModelName {
   public static final String QWEN_14B_CHAT = "qwen-14b-chat";  // Qwen open sourced 14-billion-parameters version
   public static final String QWEN_VL_PLUS = "qwen-vl-plus";  // Qwen multi-modal model, supports image and text information.
   public static final String QWEN_VL_MAX = "qwen-vl-max";  // Qwen multi-modal model, offers optimal performance on a wider range of complex tasks.
+  public static final String QWEN_AUDIO_TURBO = "qwen-audio-turbo";
 
   // Text embedding models
   public static final String TEXT_EMBEDDING_V1 = "text-embedding-v1";  // Support: en, zh, es, fr, pt, id

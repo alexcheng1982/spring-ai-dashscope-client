@@ -76,7 +76,8 @@ public class DashscopeApi {
     return builder.build();
   }
 
-  public MultiModalConversationResult multiModal(List<MultiModalMessage> messages,
+  public MultiModalConversationResult multiModal(
+      List<MultiModalMessage> messages,
       DashscopeChatOptions options) {
     try {
       return multiModalConversation.call(
@@ -86,7 +87,8 @@ public class DashscopeApi {
     }
   }
 
-  public Flowable<MultiModalConversationResult> multiModalStream(List<MultiModalMessage> messages,
+  public Flowable<MultiModalConversationResult> multiModalStream(
+      List<MultiModalMessage> messages,
       DashscopeChatOptions options) {
     try {
       return multiModalConversation.streamCall(
@@ -97,7 +99,8 @@ public class DashscopeApi {
   }
 
   private MultiModalConversationParam buildMultiModalConversationParam(
-      List<MultiModalMessage> messages, DashscopeChatOptions options, boolean streaming) {
+      List<MultiModalMessage> messages, DashscopeChatOptions options,
+      boolean streaming) {
     return MultiModalConversationParam.builder()
         .model(options.getModel())
         .messages(messages)
@@ -111,6 +114,12 @@ public class DashscopeApi {
         .build();
   }
 
+  /**
+   * Union type of {@linkplain Message} and {@linkplain MultiModalMessage}
+   *
+   * @param message           Message
+   * @param multiModalMessage MultiModalMessage
+   */
   public record ChatCompletionMessage(
       Message message,
       MultiModalMessage multiModalMessage) {
@@ -129,7 +138,8 @@ public class DashscopeApi {
       DashscopeChatOptions options) {
 
     public boolean isMultiModalRequest() {
-      return messages.stream().anyMatch(message -> message.multiModalMessage() != null);
+      return messages.stream()
+          .anyMatch(message -> message.multiModalMessage() != null);
     }
 
     public List<Message> getMessages() {
@@ -143,6 +153,13 @@ public class DashscopeApi {
     }
   }
 
+  /**
+   * Union type of {@linkplain GenerationResult} and
+   * {@linkplain MultiModalConversationResult}
+   *
+   * @param generationResult             GenerationResult
+   * @param multiModalConversationResult MultiModalConversationResult
+   */
   public record ChatCompletionResult(
       GenerationResult generationResult,
       MultiModalConversationResult multiModalConversationResult) {
@@ -151,7 +168,8 @@ public class DashscopeApi {
       this(generationResult, null);
     }
 
-    public ChatCompletionResult(MultiModalConversationResult multiModalConversationResult) {
+    public ChatCompletionResult(
+        MultiModalConversationResult multiModalConversationResult) {
       this(null, multiModalConversationResult);
     }
   }
