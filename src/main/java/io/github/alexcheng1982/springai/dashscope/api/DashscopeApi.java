@@ -37,7 +37,7 @@ public class DashscopeApi {
       List<Message> messages,
       DashscopeChatOptions options) {
     try {
-      return generation.call(buildGenerationParam(messages, options, false));
+      return generation.call(buildGenerationParam(messages, options));
     } catch (ApiException | NoApiKeyException | InputRequiredException e) {
       throw new DashscopeApiException(e);
     }
@@ -47,14 +47,14 @@ public class DashscopeApi {
       DashscopeChatOptions options) {
     try {
       return generation.streamCall(
-          buildGenerationParam(messages, options, true));
+          buildGenerationParam(messages, options));
     } catch (ApiException | NoApiKeyException | InputRequiredException e) {
       throw new DashscopeApiException(e);
     }
   }
 
   private GenerationParam buildGenerationParam(List<Message> messages,
-      DashscopeChatOptions options, boolean streaming) {
+      DashscopeChatOptions options) {
     var builder = GenerationParam.builder()
         .model(options.getModel())
         .topP(Optional.ofNullable(options.getTopP()).map(Double::valueOf)
@@ -68,7 +68,8 @@ public class DashscopeApi {
         .messages(messages)
         .tools(options.getTools())
         .resultFormat(MESSAGE)
-        .incrementalOutput(streaming);
+        .incrementalOutput(
+            Objects.equals(options.getIncrementalOutput(), Boolean.TRUE));
 
     if (options.getStops() != null) {
       builder.stopStrings(options.getStops());

@@ -1,7 +1,6 @@
 package io.github.alexcheng1982.springai.dashscope;
 
 import com.alibaba.dashscope.tools.ToolBase;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,11 +27,11 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   private Float temperature;
   private List<String> stops;
   private Integer maxTokens;
+  private Boolean incrementalOutput;
   private List<ToolBase> tools;
 
   private List<FunctionCallback> functionCallbacks = new ArrayList<>();
 
-  @JsonProperty("functions")
   private Set<String> functions = new HashSet<>();
 
   public String getModel() {
@@ -93,6 +92,14 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
 
   public void setMaxTokens(Integer maxTokens) {
     this.maxTokens = maxTokens;
+  }
+
+  public Boolean getIncrementalOutput() {
+    return incrementalOutput;
+  }
+
+  public void setIncrementalOutput(Boolean incrementalOutput) {
+    this.incrementalOutput = incrementalOutput;
   }
 
   @Override
