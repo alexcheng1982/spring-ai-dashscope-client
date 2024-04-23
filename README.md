@@ -17,7 +17,7 @@ Add Maven dependency:
 <dependency>
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client</artifactId>
-  <version>0.5.0</version>
+  <version>0.8.0</version>
 </dependency>
 ```
 
