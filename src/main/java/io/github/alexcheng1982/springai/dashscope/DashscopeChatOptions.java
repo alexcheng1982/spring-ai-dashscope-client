@@ -186,6 +186,11 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
       return this;
     }
 
+    public Builder withIncrementalOutput(Boolean incrementalOutput) {
+      this.options.incrementalOutput = incrementalOutput;
+      return this;
+    }
+
     public Builder withTopK(Integer topK) {
       this.options.topK = topK;
       return this;
