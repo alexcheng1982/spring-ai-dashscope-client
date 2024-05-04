@@ -16,7 +16,6 @@ import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi.ChatCompletionMessage;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi.ChatCompletionRequest;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi.ChatCompletionResult;
-import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import io.github.alexcheng1982.springai.dashscope.metadata.DashscopeChatResponseMetadata;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,8 +48,8 @@ public class DashscopeChatClient extends
     ChatClient, StreamingChatClient {
 
   private static final DashscopeChatOptions DEFAULT_OPTIONS = DashscopeChatOptions.builder()
-      .withModel(DashscopeModelName.QWEN_TURBO)
-      .withTemperature(0.7f).build();
+      .withModel(DashscopeChatOptions.DEFAULT_MODEL)
+      .build();
   private final DashscopeChatOptions defaultOptions;
   private final DashscopeApi dashscopeApi;
 

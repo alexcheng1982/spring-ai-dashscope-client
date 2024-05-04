@@ -1,6 +1,7 @@
 package io.github.alexcheng1982.springai.dashscope;
 
 import com.alibaba.dashscope.tools.ToolBase;
+import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,8 @@ import org.springframework.util.Assert;
  */
 public class DashscopeChatOptions implements FunctionCallingOptions,
     ChatOptions {
+
+  public static final String DEFAULT_MODEL = DashscopeModelName.QWEN_TURBO;
 
   private String model;
   private Float topP;
