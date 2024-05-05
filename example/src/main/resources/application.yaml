@@ -1,0 +1,7 @@
+spring:
+  ai:
+    dashscope:
+      chat:
+        options:
+          model: qwen-plus
+          temperature: 0.2

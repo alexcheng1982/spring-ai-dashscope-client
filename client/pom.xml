@@ -14,8 +14,7 @@
 
   <name>Aliyun Dashscope Spring AI Client</name>
   <description>Aliyun Dashscope Spring AI Client</description>
-
-
+  
   <dependencies>
     <dependency>
       <groupId>org.springframework.ai</groupId>

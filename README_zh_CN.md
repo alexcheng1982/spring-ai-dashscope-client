@@ -1,20 +1,19 @@
-# Aliyun Dashscope Spring AI Client
+# Spring AI 阿里云模型服务灵积（Dashscope）客户端
 
 [English](./README.md) | [中文](./README_zh_CN.md)
 
-Aliyun Dashscope Client for Spring AI
+阿里云模型服务灵积（Dashscope）Spring AI 集成客户端
 
 [![build](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml/badge.svg)](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml)
 
 ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.alexcheng1982/spring-ai-dashscope-client)
 
 
-> An Aliyun Dashscope API key is required. The key is set as environment
-> variable `DASHSCOPE_API_KEY`.
+> 需要阿里云模型服务灵积的 API Key，设置为环境变量 `DASHSCOPE_API_KEY`。
 
-## Quick start
+## 快速上手
 
-Add Maven dependency:
+添加 Maven 依赖
 
 ```xml
 
@@ -25,24 +24,24 @@ Add Maven dependency:
 </dependency>
 ```
 
-Usage:
+使用：
 
 ```java
 var client = DashscopeChatClient.createDefault();
 var response = client.call("hello");
 ```
 
-## Features
+## 功能
 
 * `ChatClient`
 * `StreamingChatClient`
 * `EmbeddingClient`
-* Function calling
-* Multimodal input with images and audios
+* 方法调用
+* 多模态输入，图片和音频
 
-## Spring Boot Starter
+## Spring Boot 集成
 
-Add Spring Boot starter:
+添加 Spring Boot Starter 的依赖：
 
 ```xml
 
@@ -53,8 +52,8 @@ Add Spring Boot starter:
 </dependency>
 ```
 
-This will create a `ChatClient` bean. Default `ChatOptions` can be configured
-with the configuration key `spring.ai.dashscope.chat.options`.
+会自动创建一个 `ChatClient` 类型的 Bean。默认的 `ChatOptions`
+可以通过配置项 `spring.ai.dashscope.chat.options` 来配置。
 
 ```yaml
 spring:
@@ -66,4 +65,4 @@ spring:
           temperature: 0.2
 ```
 
-See [example](./example) for reference.
+可以参考[代码示例](./example)。
