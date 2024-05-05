@@ -4,12 +4,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>io.github.alexcheng1982</groupId>
-    <artifactId>spring-ai-dashscope-client-parent</artifactId>
-    <version>0.9.0</version>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.2.4</version>
+    <relativePath/>
   </parent>
 
+  <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client-example</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <name>Aliyun Dashscope Spring AI Client :: Example</name>
   <description>Aliyun Dashscope Spring AI Client :: Example</description>
 
@@ -17,7 +20,6 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring-boot.version>3.2.4</spring-boot.version>
     <spring-ai.version>0.8.1</spring-ai.version>
   </properties>
 
@@ -37,12 +39,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>${spring-boot.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-json</artifactId>
-      <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.ai</groupId>
@@ -51,7 +47,7 @@
     <dependency>
       <groupId>io.github.alexcheng1982</groupId>
       <artifactId>spring-ai-dashscope-spring-boot-starter</artifactId>
-      <version>${project.version}</version>
+      <version>0.9.0</version>
     </dependency>
     <dependency>
       <groupId>org.springdoc</groupId>
