@@ -12,9 +12,9 @@
   <artifactId>spring-ai-dashscope-client</artifactId>
   <packaging>jar</packaging>
 
-  <name>Aliyun Dashscope Spring AI Client</name>
-  <description>Aliyun Dashscope Spring AI Client</description>
-  
+  <name>Aliyun Dashscope Spring AI Client :: Client</name>
+  <description>Aliyun Dashscope Spring AI Client :: Client</description>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.ai</groupId>

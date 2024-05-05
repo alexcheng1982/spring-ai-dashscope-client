@@ -10,8 +10,8 @@
   </parent>
 
   <artifactId>spring-ai-dashscope-spring-boot-starter</artifactId>
-  <name>Spring AI Dashscope Client Spring Boot Starter</name>
-  <description>Spring AI Dashscope Client Spring Boot Starter
+  <name>Aliyun Dashscope Spring AI Client :: Spring Boot Starter</name>
+  <description>Aliyun Dashscope Spring AI Client :: Spring Boot Starter
   </description>
   <packaging>pom</packaging>
 

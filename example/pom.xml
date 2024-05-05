@@ -13,8 +13,8 @@
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client-example</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Spring AI Dashscope Client Example</name>
-  <description>Spring AI Dashscope Client Example</description>
+  <name>Aliyun Dashscope Spring AI Client :: Example</name>
+  <description>Aliyun Dashscope Spring AI Client :: Example</description>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>

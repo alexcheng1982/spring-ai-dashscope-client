@@ -9,8 +9,8 @@
   <version>0.9.0</version>
   <packaging>pom</packaging>
 
-  <name>Aliyun Dashscope Spring AI Client Parent</name>
-  <description>Aliyun Dashscope Spring AI Client</description>
+  <name>Aliyun Dashscope Spring AI Client :: Parent</name>
+  <description>Aliyun Dashscope Spring AI Client :: Parent</description>
   <url>https://github.com/alexcheng1982/spring-ai-dashscope-client</url>
   <licenses>
     <license>

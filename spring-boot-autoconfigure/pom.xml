@@ -10,8 +10,8 @@
   </parent>
 
   <artifactId>spring-ai-dashscope-spring-boot-autoconfigure</artifactId>
-  <name>Spring AI Dashscope Client Spring Boot Autoconfigure</name>
-  <description>Spring AI Dashscope Client Spring Boot Autoconfigure
+  <name>Aliyun Dashscope Spring AI Client :: Spring Boot Autoconfigure</name>
+  <description>Aliyun Dashscope Spring AI Client :: Spring Boot Autoconfigure
   </description>
 
   <dependencies>
