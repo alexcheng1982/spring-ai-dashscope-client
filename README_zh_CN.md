@@ -6,14 +6,14 @@
 
 [![build](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml/badge.svg)](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml)
 
-![Maven Central Version](https://img.shields.io/maven-central/v/io.github.alexcheng1982/spring-ai-dashscope-client)
+[![Maven Central Version](https://img.shields.io/maven-central/v/io.github.alexcheng1982/spring-ai-dashscope-client)](https://central.sonatype.com/artifact/io.github.alexcheng1982/spring-ai-dashscope-client)
 
 
 > 需要阿里云模型服务灵积的 API Key，设置为环境变量 `DASHSCOPE_API_KEY`。
 
 ## 快速上手
 
-添加 Maven 依赖
+添加 [Maven 依赖](https://central.sonatype.com/artifact/io.github.alexcheng1982/spring-ai-dashscope-client)
 
 ```xml
 

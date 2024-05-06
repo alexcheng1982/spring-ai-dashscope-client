@@ -6,7 +6,7 @@ Aliyun Dashscope Client for Spring AI
 
 [![build](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml/badge.svg)](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml)
 
-![Maven Central Version](https://img.shields.io/maven-central/v/io.github.alexcheng1982/spring-ai-dashscope-client)
+[![Maven Central Version](https://img.shields.io/maven-central/v/io.github.alexcheng1982/spring-ai-dashscope-client)](https://central.sonatype.com/artifact/io.github.alexcheng1982/spring-ai-dashscope-client)
 
 
 > An Aliyun Dashscope API key is required. The key is set as environment
@@ -14,7 +14,7 @@ Aliyun Dashscope Client for Spring AI
 
 ## Quick start
 
-Add Maven dependency:
+Add [Maven dependency](https://central.sonatype.com/artifact/io.github.alexcheng1982/spring-ai-dashscope-client):
 
 ```xml
 
