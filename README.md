@@ -21,7 +21,7 @@ Add Maven dependency:
 <dependency>
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client</artifactId>
-  <version>0.9.0</version>
+  <version>VERSION</version>
 </dependency>
 ```
 
@@ -49,7 +49,7 @@ Add Spring Boot starter:
 <dependency>
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-spring-boot-starter</artifactId>
-  <version>0.9.0</version>
+  <version>VERSION</version>
 </dependency>
 ```
 
