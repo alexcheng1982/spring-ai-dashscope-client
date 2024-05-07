@@ -1,6 +1,7 @@
 package io.github.alexcheng1982.springai.dashscope.autoconfigure;
 
 import io.github.alexcheng1982.springai.dashscope.DashscopeChatClient;
+import io.github.alexcheng1982.springai.dashscope.DashscopeChatOptions;
 import io.github.alexcheng1982.springai.dashscope.DashscopeEmbeddingClient;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi;
 import org.springframework.ai.model.function.FunctionCallbackContext;
@@ -27,10 +28,19 @@ public class DashscopeAutoConfiguration {
   @ConditionalOnProperty(prefix = DashscopeChatProperties.CONFIG_PREFIX, name = "enabled", havingValue = "true",
       matchIfMissing = true)
   public DashscopeChatClient dashscopeChatClient(DashscopeApi dashscopeApi,
-      DashscopeChatProperties properties,
+      DashscopeChatOptions options,
       FunctionCallbackContext functionCallbackContext) {
-    return new DashscopeChatClient(dashscopeApi, properties.getOptions(),
+    return new DashscopeChatClient(dashscopeApi, options,
         functionCallbackContext);
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  @ConditionalOnProperty(prefix = DashscopeChatProperties.CONFIG_PREFIX, name = "enabled", havingValue = "true",
+      matchIfMissing = true)
+  public DashscopeChatOptions defaultDashscopeChatOptions(
+      DashscopeChatProperties properties) {
+    return properties.getOptions();
   }
 
   @Bean
