@@ -1,6 +1,7 @@
 package io.github.alexcheng1982.springai.dashscope.autoconfigure;
 
 import io.github.alexcheng1982.springai.dashscope.DashscopeChatClient;
+import io.github.alexcheng1982.springai.dashscope.DashscopeEmbeddingClient;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi;
 import org.springframework.ai.model.function.FunctionCallbackContext;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -11,7 +12,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @ConditionalOnClass(DashscopeApi.class)
-@EnableConfigurationProperties({DashscopeChatProperties.class})
+@EnableConfigurationProperties({DashscopeChatProperties.class,
+    DashscopeEmbeddingProperties.class})
 public class DashscopeAutoConfiguration {
 
   @Bean
@@ -29,6 +31,15 @@ public class DashscopeAutoConfiguration {
       FunctionCallbackContext functionCallbackContext) {
     return new DashscopeChatClient(dashscopeApi, properties.getOptions(),
         functionCallbackContext);
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  @ConditionalOnProperty(prefix = DashscopeEmbeddingProperties.CONFIG_PREFIX, name = "enabled", havingValue = "true",
+      matchIfMissing = true)
+  public DashscopeEmbeddingClient dashscopeEmbeddingClient(
+      DashscopeEmbeddingProperties properties) {
+    return new DashscopeEmbeddingClient(properties.getOptions());
   }
 
   @Bean

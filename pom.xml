@@ -29,6 +29,7 @@
     <module>client</module>
     <module>spring-boot-autoconfigure</module>
     <module>spring-boot-starter</module>
+    <module>example</module>
   </modules>
 
   <scm>

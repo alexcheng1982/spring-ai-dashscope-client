@@ -1,9 +1,13 @@
 package io.github.alexcheng1982.springai.dashscope;
 
 import com.alibaba.dashscope.embeddings.TextEmbeddingParam.TextType;
+import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import org.springframework.ai.embedding.EmbeddingOptions;
 
 public class DashscopeEmbeddingOptions implements EmbeddingOptions {
+
+  public static final String DEFAULT_MODEL = DashscopeModelName.TEXT_EMBEDDING_V1;
+
   private String model;
 
   private TextType textType;
@@ -33,6 +37,7 @@ public class DashscopeEmbeddingOptions implements EmbeddingOptions {
   }
 
   public static class Builder {
+
     private final DashscopeEmbeddingOptions options;
 
     public Builder() {

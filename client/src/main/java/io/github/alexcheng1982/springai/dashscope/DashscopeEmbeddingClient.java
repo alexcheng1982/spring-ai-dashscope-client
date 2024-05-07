@@ -6,7 +6,6 @@ import com.alibaba.dashscope.embeddings.TextEmbeddingParam.TextType;
 import com.alibaba.dashscope.exception.ApiException;
 import com.alibaba.dashscope.exception.NoApiKeyException;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApiException;
-import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import java.util.List;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.Embedding;
@@ -19,11 +18,22 @@ import org.springframework.ai.embedding.EmbeddingResponse;
  */
 public class DashscopeEmbeddingClient implements EmbeddingClient {
 
+  private DashscopeEmbeddingOptions defaultOptions;
+
+  public DashscopeEmbeddingClient() {
+  }
+
+  public DashscopeEmbeddingClient(DashscopeEmbeddingOptions defaultOptions) {
+    this.defaultOptions = defaultOptions;
+  }
+
   @Override
   public EmbeddingResponse call(EmbeddingRequest request) {
     var builder = TextEmbeddingParam.builder()
         .texts(request.getInstructions());
-    if (request.getOptions() instanceof DashscopeEmbeddingOptions options) {
+    var options = request.getOptions() instanceof DashscopeEmbeddingOptions
+        ? (DashscopeEmbeddingOptions) request.getOptions() : defaultOptions;
+    if (options != null) {
       if (options.getModel() != null) {
         builder.model(options.getModel());
       }
@@ -31,7 +41,7 @@ public class DashscopeEmbeddingClient implements EmbeddingClient {
         builder.textType(options.getTextType());
       }
     } else {
-      builder.model(DashscopeModelName.TEXT_EMBEDDING_V1)
+      builder.model(DashscopeEmbeddingOptions.DEFAULT_MODEL)
           .textType(TextType.DOCUMENT);
     }
     TextEmbedding embedding = new TextEmbedding();

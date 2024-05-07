@@ -5,3 +5,6 @@ spring:
         options:
           model: qwen-plus
           temperature: 0.2
+      embedding:
+        options:
+          model: text-embedding-v2
