@@ -53,8 +53,11 @@ Add Spring Boot starter:
 </dependency>
 ```
 
-This will create a `ChatClient` bean. Default `ChatOptions` can be configured
+This will create a `ChatClient` bean and an `EmbeddingClient` bean.
+Default `ChatOptions` can be configured
 with the configuration key `spring.ai.dashscope.chat.options`.
+Default `EmbeddingOptions` can be configured with the configuration
+key `spring.ai.dashscope.embedding.options`.
 
 ```yaml
 spring:
@@ -64,6 +67,9 @@ spring:
         options:
           model: qwen-plus
           temperature: 0.2
+      embedding:
+        options:
+          model: text-embedding-v2
 ```
 
 See [example](./example) for reference.

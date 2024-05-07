@@ -52,8 +52,11 @@ var response = client.call("hello");
 </dependency>
 ```
 
-会自动创建一个 `ChatClient` 类型的 Bean。默认的 `ChatOptions`
-可以通过配置项 `spring.ai.dashscope.chat.options` 来配置。
+会自动创建一个 `ChatClient` 类型的 Bean 和一个 `EmbeddingClient` 类型的
+Bean。默认的 `ChatOptions`
+可以通过配置项 `spring.ai.dashscope.chat.options`
+来配置。默认的 `EmbeddingOptions`
+可以通过配置项 `spring.ai.dashscope.embedding.options` 来配置。
 
 ```yaml
 spring:
@@ -63,6 +66,9 @@ spring:
         options:
           model: qwen-plus
           temperature: 0.2
+      embedding:
+        options:
+          model: text-embedding-v2
 ```
 
 可以参考[代码示例](./example)。
