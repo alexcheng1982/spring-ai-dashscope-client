@@ -13,7 +13,7 @@
   <name>Aliyun Dashscope Spring AI Client :: Spring Boot Starter</name>
   <description>Aliyun Dashscope Spring AI Client :: Spring Boot Starter
   </description>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
