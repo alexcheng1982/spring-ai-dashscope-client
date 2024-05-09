@@ -193,11 +193,7 @@ public class DashscopeChatClient extends
     }
 
     if (!CollectionUtils.isEmpty(functionsForThisRequest)) {
-      var toolsOptions = DashscopeChatOptions.builder()
-          .withTools(this.getToolFunctions(functionsForThisRequest))
-          .build();
-      options = ModelOptionsUtils.merge(toolsOptions, options,
-          DashscopeChatOptions.class);
+      options.setTools(this.getToolFunctions(functionsForThisRequest));
     }
 
     return new ChatCompletionRequest(chatCompletionMessages, options);
