@@ -24,4 +24,11 @@ public class DashscopeChatResponseMetadata implements ChatResponseMetadata {
   public Usage getUsage() {
     return this.usage;
   }
+
+  @Override
+  public String toString() {
+    return "DashscopeChatResponseMetadata{" +
+        "usage=" + usage +
+        '}';
+  }
 }

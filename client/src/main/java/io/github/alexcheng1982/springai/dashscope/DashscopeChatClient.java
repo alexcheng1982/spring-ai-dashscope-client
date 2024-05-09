@@ -158,13 +158,19 @@ public class DashscopeChatClient extends
     List<ChatCompletionMessage> chatCompletionMessages = toDashscopeMessages(
         prompt.getInstructions());
 
-    DashscopeChatOptions options = defaultOptions;
+    DashscopeChatOptions options = new DashscopeChatOptions();
+    if (defaultOptions != null) {
+      options = ModelOptionsUtils.merge(defaultOptions, options,
+          DashscopeChatOptions.class);
+    }
 
     if (prompt.getOptions() != null) {
       if (prompt.getOptions() instanceof ChatOptions runtimeOptions) {
-        options = ModelOptionsUtils.copyToTarget(
+        var promptOptions = ModelOptionsUtils.copyToTarget(
             runtimeOptions,
             ChatOptions.class, DashscopeChatOptions.class);
+        options = ModelOptionsUtils.merge(promptOptions, options,
+            DashscopeChatOptions.class);
 
         Set<String> promptEnabledFunctions = this.handleFunctionCallbackConfigurations(
             options,
@@ -187,9 +193,11 @@ public class DashscopeChatClient extends
     }
 
     if (!CollectionUtils.isEmpty(functionsForThisRequest)) {
-      options = DashscopeChatOptions.builder(options)
+      var toolsOptions = DashscopeChatOptions.builder()
           .withTools(this.getToolFunctions(functionsForThisRequest))
           .build();
+      options = ModelOptionsUtils.merge(toolsOptions, options,
+          DashscopeChatOptions.class);
     }
 
     return new ChatCompletionRequest(chatCompletionMessages, options);

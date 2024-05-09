@@ -50,4 +50,13 @@ public class DashscopeUsage implements Usage {
   public Long getTotalTokens() {
     return this.totalTokens;
   }
+
+  @Override
+  public String toString() {
+    return "DashscopeUsage{" +
+        "promptTokens=" + promptTokens +
+        ", generationTokens=" + generationTokens +
+        ", totalTokens=" + totalTokens +
+        '}';
+  }
 }
