@@ -1,10 +1,8 @@
 package io.github.alexcheng1982.springai.dashscope;
 
 import com.alibaba.dashscope.tools.ToolBase;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,23 +26,20 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
 
   public static final String DEFAULT_MODEL = DashscopeModelName.QWEN_TURBO;
 
-  private @JsonProperty("model") String model;
-  private @JsonProperty("top_p") Float topP;
-  private @JsonProperty("top_k") Integer topK;
-  private @JsonProperty("enable_search") Boolean enableSearch;
-  private @JsonProperty("seed") Integer seed;
-  private @JsonProperty("repetition_penalty") Float repetitionPenalty;
-  private @JsonProperty("temperature") Float temperature;
-  private @JsonProperty("stops") List<String> stops;
-  private @JsonProperty("max_tokens") Integer maxTokens;
-  private @JsonProperty("incremental_output") Boolean incrementalOutput;
-  @JsonIgnore
+  private String model;
+  private Float topP;
+  private Integer topK;
+  private Boolean enableSearch;
+  private Integer seed;
+  private Float repetitionPenalty;
+  private Float temperature;
+  private List<String> stops;
+  private Integer maxTokens;
+  private Boolean incrementalOutput;
   private List<ToolBase> tools;
 
-  @JsonIgnore
   private List<FunctionCallback> functionCallbacks = new ArrayList<>();
 
-  @JsonIgnore
   private Set<String> functions = new HashSet<>();
 
   public String getModel() {
