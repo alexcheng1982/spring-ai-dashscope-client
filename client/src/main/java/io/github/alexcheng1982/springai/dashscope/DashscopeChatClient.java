@@ -160,8 +160,7 @@ public class DashscopeChatClient extends
 
     DashscopeChatOptions options = new DashscopeChatOptions();
     if (defaultOptions != null) {
-      options = ModelOptionsUtils.merge(defaultOptions, options,
-          DashscopeChatOptions.class);
+      options = defaultOptions.createCopy();
     }
 
     if (prompt.getOptions() != null) {
@@ -169,8 +168,7 @@ public class DashscopeChatClient extends
         var promptOptions = ModelOptionsUtils.copyToTarget(
             runtimeOptions,
             ChatOptions.class, DashscopeChatOptions.class);
-        options = ModelOptionsUtils.merge(promptOptions, options,
-            DashscopeChatOptions.class);
+        options = options.copyFrom(promptOptions);
 
         Set<String> promptEnabledFunctions = this.handleFunctionCallbackConfigurations(
             options,

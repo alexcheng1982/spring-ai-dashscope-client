@@ -9,11 +9,13 @@ import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.model.function.FunctionCallback;
 import org.springframework.ai.model.function.FunctionCallingOptions;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 /**
  * {@linkplain ChatOptions} of Aliyun Dashscope
@@ -154,6 +156,57 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   @Override
   public void setFunctions(Set<String> functions) {
     this.functions = functions;
+  }
+
+  public DashscopeChatOptions createCopy() {
+    DashscopeChatOptions copy = new DashscopeChatOptions();
+    copy.setModel(this.getModel());
+    copy.setTopP(this.getTopP());
+    copy.setTopK(this.getTopK());
+    copy.setEnableSearch(this.getEnableSearch());
+    copy.setMaxTokens(this.getMaxTokens());
+    copy.setIncrementalOutput(this.getIncrementalOutput());
+    copy.setTemperature(this.getTemperature());
+    copy.setSeed(this.getSeed());
+    copy.setRepetitionPenalty(this.getRepetitionPenalty());
+    copy.setFunctions(this.getFunctions());
+    copy.setFunctionCallbacks(this.getFunctionCallbacks());
+    copy.setTools(this.getTools());
+    return copy;
+  }
+
+  public DashscopeChatOptions copyFrom(DashscopeChatOptions options) {
+    var copy = this.createCopy();
+    Optional.ofNullable(options.getModel()).ifPresent(copy::setModel);
+    Optional.ofNullable(options.getTopP()).ifPresent(copy::setTopP);
+    Optional.ofNullable(options.getTopK()).ifPresent(copy::setTopK);
+    Optional.ofNullable(options.getEnableSearch())
+        .ifPresent(copy::setEnableSearch);
+    Optional.ofNullable(options.getMaxTokens()).ifPresent(copy::setMaxTokens);
+    Optional.ofNullable(options.getIncrementalOutput())
+        .ifPresent(copy::setIncrementalOutput);
+    Optional.ofNullable(options.getTemperature())
+        .ifPresent(copy::setTemperature);
+    Optional.ofNullable(options.getRepetitionPenalty())
+        .ifPresent(copy::setRepetitionPenalty);
+    Optional.ofNullable(options.getSeed())
+        .ifPresent(copy::setSeed);
+    if (!CollectionUtils.isEmpty(options.getFunctions())) {
+      copy.setFunctions(options.getFunctions());
+    }
+    return copy;
+  }
+
+  public DashscopeChatOptions updateFromChatOptions(ChatOptions chatOptions) {
+    if (chatOptions instanceof DashscopeChatOptions dashscopeChatOptions) {
+      return this.copyFrom(dashscopeChatOptions);
+    } else {
+      DashscopeChatOptions updatedOptions = this.createCopy();
+      updatedOptions.setTemperature(chatOptions.getTemperature());
+      updatedOptions.setTopP(chatOptions.getTopP());
+      updatedOptions.setTopK(chatOptions.getTopK());
+      return updatedOptions;
+    }
   }
 
   public static Builder builder() {
