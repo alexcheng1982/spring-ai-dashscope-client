@@ -17,8 +17,10 @@ class DashscopeChatOptionsTest {
     assertEquals(DashscopeModelName.QWEN_TURBO, options.getModel());
     assertEquals(0.2f, options.getTemperature());
     var updated = new DashscopeChatOptions();
-    ModelOptionsUtils.merge(options, updated, DashscopeChatOptions.class);
+    updated = ModelOptionsUtils.merge(options, updated,
+        DashscopeChatOptions.class);
     updated.setTemperature(0.7f);
+    assertEquals(DashscopeModelName.QWEN_TURBO, updated.getModel());
     assertEquals(0.7f, updated.getTemperature());
   }
 }
