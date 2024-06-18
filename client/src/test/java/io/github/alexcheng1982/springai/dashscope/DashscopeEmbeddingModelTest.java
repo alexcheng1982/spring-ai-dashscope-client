@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 @Manual
-public class DashscopeEmbeddingClientTest {
+public class DashscopeEmbeddingModelTest {
 
   @Test
   void smokeTest() {
-    var client = new DashscopeEmbeddingClient();
+    var client = new DashscopeEmbeddingModel();
     var result = client.embed("hello");
     assertNotNull(result);
     assertFalse(result.isEmpty());

@@ -9,21 +9,21 @@ import io.github.alexcheng1982.springai.dashscope.api.DashscopeApiException;
 import java.util.List;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.Embedding;
-import org.springframework.ai.embedding.EmbeddingClient;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.embedding.EmbeddingRequest;
 import org.springframework.ai.embedding.EmbeddingResponse;
 
 /**
- * Spring AI {@linkplain EmbeddingClient} for Aliyun Dashscope
+ * Spring AI {@linkplain EmbeddingModel} for Aliyun Dashscope
  */
-public class DashscopeEmbeddingClient implements EmbeddingClient {
+public class DashscopeEmbeddingModel implements EmbeddingModel {
 
   private DashscopeEmbeddingOptions defaultOptions;
 
-  public DashscopeEmbeddingClient() {
+  public DashscopeEmbeddingModel() {
   }
 
-  public DashscopeEmbeddingClient(DashscopeEmbeddingOptions defaultOptions) {
+  public DashscopeEmbeddingModel(DashscopeEmbeddingOptions defaultOptions) {
     this.defaultOptions = defaultOptions;
   }
 

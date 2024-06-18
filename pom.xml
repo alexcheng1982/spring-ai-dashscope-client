@@ -46,7 +46,7 @@
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <dashscope-sdk.version>2.13.0</dashscope-sdk.version>
-    <spring-ai.version>0.8.1</spring-ai.version>
+    <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
     <jackson.version>2.14.2</jackson.version>
     <spring-boot.version>3.2.4</spring-boot.version>
   </properties>
@@ -163,6 +163,14 @@
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
+    </repository>
+    <repository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <url>https://repo.spring.io/snapshot</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
     </repository>
   </repositories>
 

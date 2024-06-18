@@ -16,6 +16,7 @@ import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi.ChatCompletionMessage;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi.ChatCompletionRequest;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi.ChatCompletionResult;
+import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import io.github.alexcheng1982.springai.dashscope.metadata.DashscopeChatResponseMetadata;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,11 +24,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.springframework.ai.chat.ChatClient;
-import org.springframework.ai.chat.ChatResponse;
-import org.springframework.ai.chat.StreamingChatClient;
 import org.springframework.ai.chat.messages.MessageType;
 import org.springframework.ai.chat.metadata.ChatGenerationMetadata;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.model.StreamingChatModel;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.model.ModelOptionsUtils;
@@ -40,12 +41,12 @@ import reactor.adapter.rxjava.RxJava2Adapter;
 import reactor.core.publisher.Flux;
 
 /**
- * Spring AI {@linkplain ChatClient} and {@linkplain StreamingChatClient} for
+ * Spring AI {@linkplain ChatModel} and {@linkplain StreamingChatModel} for
  * Aliyun Dashscope
  */
-public class DashscopeChatClient extends
+public class DashscopeChatModel extends
     AbstractFunctionCallSupport<ChatCompletionMessage, ChatCompletionRequest, ChatCompletionResult> implements
-    ChatClient, StreamingChatClient {
+    ChatModel, StreamingChatModel {
 
   private static final DashscopeChatOptions DEFAULT_OPTIONS = DashscopeChatOptions.builder()
       .withModel(DashscopeChatOptions.DEFAULT_MODEL)
@@ -53,21 +54,21 @@ public class DashscopeChatClient extends
   private final DashscopeChatOptions defaultOptions;
   private final DashscopeApi dashscopeApi;
 
-  public DashscopeChatClient(DashscopeApi dashscopeApi) {
+  public DashscopeChatModel(DashscopeApi dashscopeApi) {
     this(dashscopeApi, DEFAULT_OPTIONS);
   }
 
-  public DashscopeChatClient(DashscopeApi dashscopeApi,
+  public DashscopeChatModel(DashscopeApi dashscopeApi,
       DashscopeChatOptions options) {
     this(dashscopeApi, options, null);
   }
 
-  public DashscopeChatClient(DashscopeApi dashscopeApi,
+  public DashscopeChatModel(DashscopeApi dashscopeApi,
       FunctionCallbackContext functionCallbackContext) {
     this(dashscopeApi, DEFAULT_OPTIONS, functionCallbackContext);
   }
 
-  public DashscopeChatClient(DashscopeApi dashscopeApi,
+  public DashscopeChatModel(DashscopeApi dashscopeApi,
       DashscopeChatOptions options,
       FunctionCallbackContext functionCallbackContext) {
     super(functionCallbackContext);
@@ -78,18 +79,24 @@ public class DashscopeChatClient extends
   }
 
   /**
-   * Create a {@linkplain DashscopeChatClient} with default options
+   * Create a {@linkplain DashscopeChatModel} with default options
    *
-   * @return A {@linkplain DashscopeChatClient}
+   * @return A {@linkplain DashscopeChatModel}
    */
-  public static DashscopeChatClient createDefault() {
-    return new DashscopeChatClient(new DashscopeApi());
+  public static DashscopeChatModel createDefault() {
+    return new DashscopeChatModel(new DashscopeApi());
   }
 
   @Override
   public ChatResponse call(Prompt prompt) {
     var generationResult = callWithFunctionSupport(createRequest(prompt));
     return chatCompletionResultToChatResponse(generationResult);
+  }
+
+  @Override
+  public ChatOptions getDefaultOptions() {
+    return DashscopeChatOptions.builder()
+        .withModel(DashscopeModelName.QWEN_TURBO).build();
   }
 
   @Override
@@ -104,15 +111,16 @@ public class DashscopeChatClient extends
                     new ChatCompletionResult(result));
                 return chatCompletionResultToChatResponse(response);
               }));
+    } else {
+      return RxJava2Adapter.flowableToFlux(
+          dashscopeApi.chatCompletionStream(request.getMessages(),
+                  request.options())
+              .map(result -> {
+                var response = handleFunctionCallOrReturn(request,
+                    new ChatCompletionResult(result));
+                return chatCompletionResultToChatResponse(response);
+              }));
     }
-    return RxJava2Adapter.flowableToFlux(
-        dashscopeApi.chatCompletionStream(request.getMessages(),
-                request.options())
-            .map(result -> {
-              var response = handleFunctionCallOrReturn(request,
-                  new ChatCompletionResult(result));
-              return chatCompletionResultToChatResponse(response);
-            }));
   }
 
   private ChatResponse chatCompletionResultToChatResponse(
@@ -127,10 +135,10 @@ public class DashscopeChatClient extends
 
   private ChatResponse multiModalConversationResultToChatResponse(
       MultiModalConversationResult result) {
-    List<org.springframework.ai.chat.Generation> generations = result.getOutput()
+    List<org.springframework.ai.chat.model.Generation> generations = result.getOutput()
         .getChoices()
         .stream()
-        .map(choice -> new org.springframework.ai.chat.Generation(
+        .map(choice -> new org.springframework.ai.chat.model.Generation(
             (String) choice.getMessage().getContent().get(0).get("text"))
             .withGenerationMetadata(
                 ChatGenerationMetadata.from(choice.getFinishReason(),
@@ -141,9 +149,9 @@ public class DashscopeChatClient extends
 
   private ChatResponse generationResultToChatResponse(
       GenerationResult generationResult) {
-    List<org.springframework.ai.chat.Generation> generations = generationResult.getOutput()
+    List<org.springframework.ai.chat.model.Generation> generations = generationResult.getOutput()
         .getChoices().stream()
-        .map(choice -> new org.springframework.ai.chat.Generation(
+        .map(choice -> new org.springframework.ai.chat.model.Generation(
             choice.getMessage().getContent())
             .withGenerationMetadata(
                 ChatGenerationMetadata.from(choice.getFinishReason(),
@@ -283,6 +291,24 @@ public class DashscopeChatClient extends
       return new ChatCompletionResult(
           this.dashscopeApi.chatCompletion(request.getMessages(),
               request.options()));
+    }
+  }
+
+  @Override
+  protected Flux<ChatCompletionResult> doChatCompletionStream(
+      ChatCompletionRequest request) {
+    if (request.isMultiModalRequest()) {
+      return RxJava2Adapter.flowableToFlux(
+          this.dashscopeApi.multiModalStream(request.getMultiModalMessages(),
+                  request.options())
+              .map(result -> handleFunctionCallOrReturn(request,
+                  new ChatCompletionResult(result))));
+    } else {
+      return RxJava2Adapter.flowableToFlux(
+          this.dashscopeApi.chatCompletionStream(request.getMessages(),
+                  request.options())
+              .map(result -> handleFunctionCallOrReturn(request,
+                  new ChatCompletionResult(result))));
     }
   }
 

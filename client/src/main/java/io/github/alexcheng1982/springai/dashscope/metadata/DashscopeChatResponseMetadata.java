@@ -3,12 +3,13 @@ package io.github.alexcheng1982.springai.dashscope.metadata;
 import com.alibaba.dashscope.aigc.generation.GenerationResult;
 import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversationResult;
 import org.springframework.ai.chat.metadata.ChatResponseMetadata;
+import org.springframework.ai.chat.metadata.ChatResponseMetadata.DefaultChatResponseMetadata;
 import org.springframework.ai.chat.metadata.Usage;
 
 /**
  * {@linkplain ChatResponseMetadata} implementation of Aliyun Dashscope
  */
-public class DashscopeChatResponseMetadata implements ChatResponseMetadata {
+public class DashscopeChatResponseMetadata extends DefaultChatResponseMetadata {
 
   private final DashscopeUsage usage;
 

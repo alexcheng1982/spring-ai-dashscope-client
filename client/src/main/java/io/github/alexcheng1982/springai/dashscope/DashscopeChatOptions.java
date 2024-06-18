@@ -18,7 +18,7 @@ import org.springframework.util.CollectionUtils;
 /**
  * {@linkplain ChatOptions} of Aliyun Dashscope
  *
- * @see DashscopeChatClient
+ * @see DashscopeChatModel
  */
 @JsonInclude(Include.NON_NULL)
 public class DashscopeChatOptions implements FunctionCallingOptions,
