@@ -46,6 +46,20 @@ class DashscopeChatClientTest {
   }
 
   @Test
+  void multiModalImageSmokeTest2() {
+    var client = DashscopeChatClient.createDefault();
+    var prompt = new Prompt(new UserMessage("用图片中的这些食材，做一道菜",
+        List.of(
+            new Media(IMAGE_JPEG,
+                "https://img0.baidu.com/it/u=772327866,3555189679&fm=253&fmt=auto&app=138&f=JPEG"))),
+        DashscopeChatOptions.builder()
+            .withModel(DashscopeModelName.QWEN_VL_PLUS)
+            .build());
+    var response = client.call(prompt);
+    System.out.println(response.getResult().getOutput().getContent());
+  }
+
+  @Test
   void multiModalAudioSmokeTest() {
     var client = DashscopeChatClient.createDefault();
     var prompt = new Prompt(new UserMessage("这段音频在说什么?",
