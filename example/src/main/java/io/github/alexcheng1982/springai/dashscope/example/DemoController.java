@@ -1,8 +1,9 @@
 package io.github.alexcheng1982.springai.dashscope.example;
 
 import java.util.List;
-import org.springframework.ai.chat.ChatClient;
-import org.springframework.ai.embedding.EmbeddingClient;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,21 +30,22 @@ public class DemoController {
   }
 
   private final ChatClient chatClient;
-  private final EmbeddingClient embeddingClient;
+  private final EmbeddingModel embeddingModel;
 
-  public DemoController(ChatClient chatClient,
-      EmbeddingClient embeddingClient) {
-    this.chatClient = chatClient;
-    this.embeddingClient = embeddingClient;
+  public DemoController(ChatModel chatModel,
+      EmbeddingModel embeddingModel) {
+    this.chatClient = ChatClient.create(chatModel);
+    this.embeddingModel = embeddingModel;
   }
 
   @PostMapping("/chat")
   public ChatResponse chat(@RequestBody ChatRequest request) {
-    return new ChatResponse(chatClient.call(request.input()));
+    return new ChatResponse(
+        chatClient.prompt().user(request.input()).call().content());
   }
 
   @PostMapping("/embed")
   public EmbeddingResponse embed(@RequestBody EmbeddingRequest request) {
-    return new EmbeddingResponse(embeddingClient.embed(request.input()));
+    return new EmbeddingResponse(embeddingModel.embed(request.input()));
   }
 }

@@ -47,7 +47,7 @@
     <dependency>
       <groupId>io.github.alexcheng1982</groupId>
       <artifactId>spring-ai-dashscope-spring-boot-starter</artifactId>
-      <version>1.1.2</version>
+      <version>1.2.0</version>
     </dependency>
     <dependency>
       <groupId>org.springdoc</groupId>
