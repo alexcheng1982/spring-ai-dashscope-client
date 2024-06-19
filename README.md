@@ -1,4 +1,4 @@
-# Aliyun Dashscope Spring AI Client
+# Aliyun Dashscope Spring AI Model
 
 [English](./README.md) | [中文](./README_zh_CN.md)
 
@@ -8,6 +8,12 @@ Aliyun Dashscope Model for Spring AI
 
 [![Maven Central Version](https://img.shields.io/maven-central/v/io.github.alexcheng1982/spring-ai-dashscope-client)](https://central.sonatype.com/artifact/io.github.alexcheng1982/spring-ai-dashscope-client)
 
+## Versions
+
+| Client/Model version | Spring AI version |
+|----------------------|-------------------|
+| `1.1.x`              | `0.8.1`           |
+| `1.2.x`              | `1.0.0`           |
 
 > An Aliyun Dashscope API key is required. The key is set as environment
 > variable `DASHSCOPE_API_KEY`.

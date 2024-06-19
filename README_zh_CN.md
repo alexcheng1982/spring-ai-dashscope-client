@@ -1,4 +1,4 @@
-# Spring AI 阿里云模型服务灵积（Dashscope）客户端
+# Spring AI 阿里云模型服务灵积（Dashscope）模型
 
 [English](./README.md) | [中文](./README_zh_CN.md)
 
@@ -8,6 +8,12 @@
 
 [![Maven Central Version](https://img.shields.io/maven-central/v/io.github.alexcheng1982/spring-ai-dashscope-client)](https://central.sonatype.com/artifact/io.github.alexcheng1982/spring-ai-dashscope-client)
 
+## 版本
+
+| 客户端/模型版本 | Spring AI 版本 |
+|----------|--------------|
+| `1.1.x`  | `0.8.1`      |
+| `1.2.x`  | `1.0.0`      |
 
 > 需要阿里云模型服务灵积的 API Key，设置为环境变量 `DASHSCOPE_API_KEY`。
 
