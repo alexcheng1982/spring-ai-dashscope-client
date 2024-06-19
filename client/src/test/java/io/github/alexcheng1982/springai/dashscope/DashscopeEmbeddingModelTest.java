@@ -10,8 +10,8 @@ public class DashscopeEmbeddingModelTest {
 
   @Test
   void smokeTest() {
-    var client = new DashscopeEmbeddingModel();
-    var result = client.embed("hello");
+    var model = new DashscopeEmbeddingModel();
+    var result = model.embed("hello");
     assertNotNull(result);
     assertFalse(result.isEmpty());
   }

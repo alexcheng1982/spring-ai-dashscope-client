@@ -2,7 +2,7 @@
 
 [English](./README.md) | [中文](./README_zh_CN.md)
 
-Aliyun Dashscope Client for Spring AI
+Aliyun Dashscope Model for Spring AI
 
 [![build](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml/badge.svg)](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml)
 
@@ -28,15 +28,15 @@ Add [Maven dependency](https://central.sonatype.com/artifact/io.github.alexcheng
 Usage:
 
 ```java
-var client = DashscopeChatClient.createDefault();
-var response = client.call("hello");
+var model = DashscopeChatModel.createDefault();
+var response = model.call("hello");
 ```
 
 ## Features
 
-* `ChatClient`
-* `StreamingChatClient`
-* `EmbeddingClient`
+* `ChatModel`
+* `StreamingChatModel`
+* `EmbeddingModel`
 * Function calling
 * Multimodal input with images and audios
 
@@ -53,7 +53,7 @@ Add Spring Boot starter:
 </dependency>
 ```
 
-This will create a `ChatClient` bean and an `EmbeddingClient` bean.
+This will create a `ChatModel` bean and an `EmbeddingModel` bean.
 Default `ChatOptions` can be configured
 with the configuration key `spring.ai.dashscope.chat.options`.
 Default `EmbeddingOptions` can be configured with the configuration

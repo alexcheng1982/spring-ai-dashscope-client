@@ -21,21 +21,21 @@ class DashscopeChatModelTest {
 
   @Test
   void smokeTest() {
-    var client = DashscopeChatModel.createDefault();
-    var response = client.call("hello");
+    var model = DashscopeChatModel.createDefault();
+    var response = model.call("hello");
     assertNotNull(response);
   }
 
   @Test
   void streamSmokeTest() {
-    var client = DashscopeChatModel.createDefault();
-    var response = client.stream("如何做西红柿炖牛腩？");
+    var model = DashscopeChatModel.createDefault();
+    var response = model.stream("如何做西红柿炖牛腩？");
     response.toIterable().forEach(System.out::println);
   }
 
   @Test
   void multiModalImageSmokeTest() throws MalformedURLException {
-    var client = DashscopeChatModel.createDefault();
+    var model = DashscopeChatModel.createDefault();
     var prompt = new Prompt(new UserMessage("这是什么?",
         List.of(
             new Media(IMAGE_JPEG,
@@ -45,13 +45,13 @@ class DashscopeChatModelTest {
         DashscopeChatOptions.builder()
             .withModel(DashscopeModelName.QWEN_VL_PLUS)
             .build());
-    var response = client.call(prompt);
+    var response = model.call(prompt);
     System.out.println(response.getResult().getOutput().getContent());
   }
 
   @Test
   void multiModalImageSmokeTest2() throws MalformedURLException {
-    var client = DashscopeChatModel.createDefault();
+    var model = DashscopeChatModel.createDefault();
     var prompt = new Prompt(new UserMessage("用图片中的这些食材，做一道菜",
         List.of(
             new Media(IMAGE_JPEG,
@@ -61,13 +61,13 @@ class DashscopeChatModelTest {
         DashscopeChatOptions.builder()
             .withModel(DashscopeModelName.QWEN_VL_PLUS)
             .build());
-    var response = client.call(prompt);
+    var response = model.call(prompt);
     System.out.println(response.getResult().getOutput().getContent());
   }
 
   @Test
   void multiModalAudioSmokeTest() throws MalformedURLException {
-    var client = DashscopeChatModel.createDefault();
+    var model = DashscopeChatModel.createDefault();
     var prompt = new Prompt(new UserMessage("这段音频在说什么?",
         List.of(
             new Media(new MimeType("audio", "wav"),
@@ -78,7 +78,7 @@ class DashscopeChatModelTest {
             .withModel(DashscopeModelName.QWEN_AUDIO_TURBO)
             .withMaxTokens(100)
             .build());
-    var response = client.call(prompt);
+    var response = model.call(prompt);
     System.out.println(response.getResult().getOutput().getContent());
   }
 }

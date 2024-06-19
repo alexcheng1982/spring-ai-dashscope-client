@@ -84,8 +84,8 @@ public class FunctionExampleMain {
             .withName("add")
             .withDescription("add two numbers")
             .build());
-    var client = new DashscopeChatModel(new DashscopeApi(), context);
-    var response = client.call(new Prompt("add 100 to 200", options));
+    var model = new DashscopeChatModel(new DashscopeApi(), context);
+    var response = model.call(new Prompt("add 100 to 200", options));
     return response.getResult().getOutput().getContent();
   }
 
