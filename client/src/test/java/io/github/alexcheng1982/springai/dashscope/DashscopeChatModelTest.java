@@ -8,9 +8,9 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.springframework.ai.chat.messages.Media;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.model.Media;
 import org.springframework.util.MimeType;
 
 /**
@@ -24,6 +24,7 @@ class DashscopeChatModelTest {
     var model = DashscopeChatModel.createDefault();
     var response = model.call("hello");
     assertNotNull(response);
+    System.out.println(response);
   }
 
   @Test

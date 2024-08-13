@@ -6,7 +6,7 @@
 
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client-parent</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
   <packaging>pom</packaging>
 
   <name>Aliyun Dashscope Spring AI Client :: Parent</name>
@@ -29,7 +29,6 @@
     <module>client</module>
     <module>spring-boot-autoconfigure</module>
     <module>spring-boot-starter</module>
-    <module>example</module>
   </modules>
 
   <scm>
@@ -46,7 +45,7 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <dashscope-sdk.version>2.13.0</dashscope-sdk.version>
+    <dashscope-sdk.version>2.16.2</dashscope-sdk.version>
     <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
     <jackson.version>2.14.2</jackson.version>
     <spring-boot.version>3.2.4</spring-boot.version>

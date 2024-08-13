@@ -16,6 +16,11 @@ public class DashscopeEmbeddingOptions implements EmbeddingOptions {
     return model;
   }
 
+  @Override
+  public Integer getDimensions() {
+    return null;
+  }
+
   public void setModel(String model) {
     this.model = model;
   }
