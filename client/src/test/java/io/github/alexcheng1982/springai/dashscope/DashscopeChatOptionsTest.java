@@ -14,16 +14,16 @@ class DashscopeChatOptionsTest {
   void testChatOptions() {
     var options = DashscopeChatOptions.builder()
         .withModel(DashscopeModelName.QWEN_TURBO)
-        .withTemperature(0.2f)
+        .withTemperature(0.2)
         .withFunctions(Set.of("add"))
         .build();
     assertEquals(DashscopeModelName.QWEN_TURBO, options.getModel());
-    assertEquals(0.2f, options.getTemperature());
-    var anotherOptions = DashscopeChatOptions.builder().withTemperature(0.7f)
+    assertEquals(0.2, options.getTemperature());
+    var anotherOptions = DashscopeChatOptions.builder().withTemperature(0.7)
         .build();
     var updated = options.updateFromChatOptions(anotherOptions);
     assertEquals(DashscopeModelName.QWEN_TURBO, updated.getModel());
-    assertEquals(0.7f, updated.getTemperature());
+    assertEquals(0.7, updated.getTemperature());
     assertFalse(CollectionUtils.isEmpty(updated.getFunctions()));
   }
 }

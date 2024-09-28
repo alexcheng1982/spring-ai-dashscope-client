@@ -69,7 +69,7 @@ public class FunctionExampleMain {
         .build();
     var options = DashscopeChatOptions.builder()
         .withModel(DashscopeModelName.QWEN_PLUS)
-        .withTemperature(0.2f)
+        .withTemperature(0.2)
         .withTools(List.of(
             ToolFunction.builder()
                 .type("function")
