@@ -49,15 +49,27 @@ public class DashscopeEmbeddingModel implements EmbeddingModel {
       var result = embedding.call(builder.build());
       return new EmbeddingResponse(
           result.getOutput().getEmbeddings().stream().map(item ->
-              new Embedding(item.getEmbedding(), item.getTextIndex())
+              new Embedding(convertEmbeddings(item.getEmbedding()),
+                  item.getTextIndex())
           ).toList());
     } catch (ApiException | NoApiKeyException e) {
       throw new DashscopeApiException(e);
     }
   }
 
+  private float[] convertEmbeddings(List<Double> values) {
+    int length = values.size();
+    float[] result = new float[length];
+    int index = 0;
+    for (Double value : values) {
+      result[index++] = value.floatValue();
+    }
+    return result;
+  }
+
+
   @Override
-  public List<Double> embed(Document document) {
+  public float[] embed(Document document) {
     return embed(document.getContent());
   }
 }

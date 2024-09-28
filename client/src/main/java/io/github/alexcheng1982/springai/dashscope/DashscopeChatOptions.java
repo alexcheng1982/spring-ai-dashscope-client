@@ -27,12 +27,12 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   public static final String DEFAULT_MODEL = DashscopeModelName.QWEN_TURBO;
 
   private String model;
-  private Float topP;
+  private Double topP;
   private Integer topK;
   private Boolean enableSearch;
   private Integer seed;
-  private Float repetitionPenalty;
-  private Float temperature;
+  private Double repetitionPenalty;
+  private Double temperature;
   private List<String> stops;
   private Integer maxTokens;
   private Boolean incrementalOutput;
@@ -47,7 +47,7 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   }
 
   @Override
-  public Float getFrequencyPenalty() {
+  public Double getFrequencyPenalty() {
     return repetitionPenalty;
   }
 
@@ -55,7 +55,7 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
     this.model = model;
   }
 
-  public void setTopP(Float topP) {
+  public void setTopP(Double topP) {
     this.topP = topP;
   }
 
@@ -79,15 +79,15 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
     this.seed = seed;
   }
 
-  public Float getRepetitionPenalty() {
+  public Double getRepetitionPenalty() {
     return repetitionPenalty;
   }
 
-  public void setRepetitionPenalty(Float repetitionPenalty) {
+  public void setRepetitionPenalty(Double repetitionPenalty) {
     this.repetitionPenalty = repetitionPenalty;
   }
 
-  public void setTemperature(Float temperature) {
+  public void setTemperature(Double temperature) {
     this.temperature = temperature;
   }
 
@@ -104,7 +104,7 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   }
 
   @Override
-  public Float getPresencePenalty() {
+  public Double getPresencePenalty() {
     return null;
   }
 
@@ -126,12 +126,12 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   }
 
   @Override
-  public Float getTemperature() {
+  public Double getTemperature() {
     return this.temperature;
   }
 
   @Override
-  public Float getTopP() {
+  public Double getTopP() {
     return this.topP;
   }
 
@@ -245,7 +245,7 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
       return this;
     }
 
-    public Builder withRepetitionPenalty(Float repetitionPenalty) {
+    public Builder withRepetitionPenalty(Double repetitionPenalty) {
       this.options.repetitionPenalty = repetitionPenalty;
       return this;
     }
@@ -282,12 +282,12 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
       return this;
     }
 
-    public Builder withTemperature(Float temperature) {
+    public Builder withTemperature(Double temperature) {
       this.options.temperature = temperature;
       return this;
     }
 
-    public Builder withTopP(Float topP) {
+    public Builder withTopP(Double topP) {
       this.options.topP = topP;
       return this;
     }

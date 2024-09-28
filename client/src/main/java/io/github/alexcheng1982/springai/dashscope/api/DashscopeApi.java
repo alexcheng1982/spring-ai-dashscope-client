@@ -62,8 +62,8 @@ public class DashscopeApi {
         .topK(options.getTopK())
         .enableSearch(Objects.equals(options.getEnableSearch(), Boolean.TRUE))
         .seed(options.getSeed())
-        .repetitionPenalty(options.getRepetitionPenalty())
-        .temperature(options.getTemperature())
+        .repetitionPenalty(doubleToFloat(options.getRepetitionPenalty()))
+        .temperature(doubleToFloat(options.getTemperature()))
         .maxTokens(options.getMaxTokens())
         .messages(messages)
         .tools(options.getTools())
@@ -75,6 +75,10 @@ public class DashscopeApi {
       builder.stopStrings(options.getStops());
     }
     return builder.build();
+  }
+
+  private Float doubleToFloat(Double value) {
+    return Optional.ofNullable(value).map(Double::floatValue).orElse(null);
   }
 
   public MultiModalConversationResult multiModal(
@@ -105,9 +109,8 @@ public class DashscopeApi {
     return MultiModalConversationParam.builder()
         .model(options.getModel())
         .messages(messages)
-        .temperature(options.getTemperature())
-        .topP(Optional.ofNullable(options.getTopP()).map(Double::valueOf)
-            .orElse(null))
+        .temperature(doubleToFloat(options.getTemperature()))
+        .topP(options.getTopP())
         .topK(options.getTopK())
         .enableSearch(options.getEnableSearch())
         .maxLength(options.getMaxTokens())
