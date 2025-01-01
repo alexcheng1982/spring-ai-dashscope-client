@@ -6,7 +6,7 @@
 
   <groupId>io.github.alexcheng1982</groupId>
   <artifactId>spring-ai-dashscope-client-parent</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.1</version>
   <packaging>pom</packaging>
 
   <name>Aliyun Dashscope Spring AI Client :: Parent</name>
