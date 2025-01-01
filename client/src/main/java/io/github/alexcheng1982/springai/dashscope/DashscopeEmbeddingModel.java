@@ -70,6 +70,6 @@ public class DashscopeEmbeddingModel implements EmbeddingModel {
 
   @Override
   public float[] embed(Document document) {
-    return embed(document.getContent());
+    return embed(document.getText());
   }
 }

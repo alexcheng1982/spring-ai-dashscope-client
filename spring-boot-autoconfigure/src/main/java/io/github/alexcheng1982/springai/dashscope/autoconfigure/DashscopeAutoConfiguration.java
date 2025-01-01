@@ -4,7 +4,8 @@ import io.github.alexcheng1982.springai.dashscope.DashscopeChatModel;
 import io.github.alexcheng1982.springai.dashscope.DashscopeChatOptions;
 import io.github.alexcheng1982.springai.dashscope.DashscopeEmbeddingModel;
 import io.github.alexcheng1982.springai.dashscope.api.DashscopeApi;
-import org.springframework.ai.model.function.FunctionCallbackContext;
+import org.springframework.ai.model.function.DefaultFunctionCallbackResolver;
+import org.springframework.ai.model.function.FunctionCallbackResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,10 +29,8 @@ public class DashscopeAutoConfiguration {
   @ConditionalOnProperty(prefix = DashscopeChatProperties.CONFIG_PREFIX, name = "enabled", havingValue = "true",
       matchIfMissing = true)
   public DashscopeChatModel dashscopeChatModel(DashscopeApi dashscopeApi,
-      DashscopeChatOptions options,
-      FunctionCallbackContext functionCallbackContext) {
-    return new DashscopeChatModel(dashscopeApi, options,
-        functionCallbackContext);
+      DashscopeChatOptions options, FunctionCallbackResolver functionCallbackResolver) {
+    return new DashscopeChatModel(dashscopeApi, options, functionCallbackResolver);
   }
 
   @Bean
@@ -54,9 +53,8 @@ public class DashscopeAutoConfiguration {
 
   @Bean
   @ConditionalOnMissingBean
-  public FunctionCallbackContext springAiFunctionManager(
-      ApplicationContext context) {
-    FunctionCallbackContext manager = new FunctionCallbackContext();
+  public FunctionCallbackResolver springAiFunctionManager(ApplicationContext context) {
+    DefaultFunctionCallbackResolver manager = new DefaultFunctionCallbackResolver();
     manager.setApplicationContext(context);
     return manager;
   }

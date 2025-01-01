@@ -35,24 +35,22 @@ import org.springframework.ai.chat.model.AbstractToolCallSupport;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.model.Generation;
-import org.springframework.ai.chat.model.StreamingChatModel;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.model.Media;
 import org.springframework.ai.model.ModelOptionsUtils;
 import org.springframework.ai.model.function.FunctionCallback;
-import org.springframework.ai.model.function.FunctionCallbackContext;
+import org.springframework.ai.model.function.FunctionCallbackResolver;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import reactor.adapter.rxjava.RxJava2Adapter;
 import reactor.core.publisher.Flux;
 
 /**
- * Spring AI {@linkplain ChatModel} and {@linkplain StreamingChatModel} for
- * Aliyun Dashscope
+ * Spring AI {@linkplain ChatModel} for Aliyun Dashscope
  */
 public class DashscopeChatModel extends AbstractToolCallSupport implements
-    ChatModel, StreamingChatModel {
+    ChatModel {
 
   private static final DashscopeChatOptions DEFAULT_OPTIONS = DashscopeChatOptions.builder()
       .withModel(DashscopeChatOptions.DEFAULT_MODEL)
@@ -70,14 +68,14 @@ public class DashscopeChatModel extends AbstractToolCallSupport implements
   }
 
   public DashscopeChatModel(DashscopeApi dashscopeApi,
-      FunctionCallbackContext functionCallbackContext) {
-    this(dashscopeApi, DEFAULT_OPTIONS, functionCallbackContext);
+      FunctionCallbackResolver functionCallbackResolver) {
+    this(dashscopeApi, DEFAULT_OPTIONS, functionCallbackResolver);
   }
 
   public DashscopeChatModel(DashscopeApi dashscopeApi,
       DashscopeChatOptions options,
-      FunctionCallbackContext functionCallbackContext) {
-    super(functionCallbackContext);
+      FunctionCallbackResolver functionCallbackResolver) {
+    super(functionCallbackResolver);
     Assert.notNull(dashscopeApi, "dashscopeApi must not be null");
     Assert.notNull(options, "Options must not be null");
     this.dashscopeApi = dashscopeApi;
@@ -159,8 +157,8 @@ public class DashscopeChatModel extends AbstractToolCallSupport implements
         .map(choice -> new org.springframework.ai.chat.model.Generation(
             new AssistantMessage(
                 (String) choice.getMessage().getContent().get(0).get("text")),
-            ChatGenerationMetadata.from(choice.getFinishReason(),
-                null))).toList();
+            ChatGenerationMetadata.builder().finishReason(choice.getFinishReason()).build()))
+        .toList();
     return new ChatResponse(generations, buildChatResponseMetadata(result));
   }
 
@@ -193,21 +191,21 @@ public class DashscopeChatModel extends AbstractToolCallSupport implements
         metadata, toolCalls);
     String finishReason = (choice.getFinishReason() != null
         ? choice.getFinishReason() : "");
-    var generationMetadata = ChatGenerationMetadata.from(finishReason, null);
+    var generationMetadata = ChatGenerationMetadata.builder().finishReason(finishReason).build();
     return new Generation(assistantMessage, generationMetadata);
   }
 
   private ChatResponseMetadata buildChatResponseMetadata(
       GenerationResult result) {
     return ChatResponseMetadata.builder()
-        .withUsage(new DashscopeUsage(result.getUsage()))
+        .usage(new DashscopeUsage(result.getUsage()))
         .build();
   }
 
   private ChatResponseMetadata buildChatResponseMetadata(
       MultiModalConversationResult result) {
     return ChatResponseMetadata.builder()
-        .withUsage(new DashscopeUsage(result.getUsage()))
+        .usage(new DashscopeUsage(result.getUsage()))
         .build();
   }
 
@@ -295,7 +293,7 @@ public class DashscopeChatModel extends AbstractToolCallSupport implements
       org.springframework.ai.chat.messages.Message message) {
     MessageBuilder<?, ?> builder = Message.builder()
         .role(roleFrom(message.getMessageType()))
-        .content(message.getContent());
+        .content(message.getText());
     if (message instanceof ToolResponseMessage toolResponseMessage
         && !CollectionUtils.isEmpty(toolResponseMessage.getResponses())) {
       var toolResponse = toolResponseMessage.getResponses().get(0);
@@ -329,7 +327,7 @@ public class DashscopeChatModel extends AbstractToolCallSupport implements
       }
     }
     content.add(new HashMap<>() {{
-      put("text", message.getContent());
+      put("text", message.getText());
     }});
     return MultiModalMessage.builder()
         .role(roleFrom(message.getMessageType()))

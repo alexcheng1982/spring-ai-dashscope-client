@@ -7,6 +7,7 @@ import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.ai.chat.prompt.ChatOptions;
@@ -41,6 +42,7 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   private List<FunctionCallback> functionCallbacks = new ArrayList<>();
 
   private Set<String> functions = new HashSet<>();
+  private Map<String, Object> toolContext = Map.of();
 
   public String getModel() {
     return model;
@@ -136,8 +138,8 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
   }
 
   @Override
-  public ChatOptions copy() {
-    return createCopy();
+  public <T extends ChatOptions> T copy() {
+    return (T) createCopy();
   }
 
   @Override
@@ -173,6 +175,18 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
     this.functions = functions;
   }
 
+  @Override
+  public Map<String, Object> getToolContext() {
+    return this.toolContext;
+  }
+
+  @Override
+  public void setToolContext(Map<String, Object> toolContext) {
+    if (toolContext != null) {
+      this.toolContext = toolContext;
+    }
+  }
+
   public DashscopeChatOptions createCopy() {
     DashscopeChatOptions copy = new DashscopeChatOptions();
     copy.setModel(this.getModel());
@@ -187,6 +201,7 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
     copy.setFunctions(this.getFunctions());
     copy.setFunctionCallbacks(this.getFunctionCallbacks());
     copy.setTools(this.getTools());
+    copy.setToolContext(this.getToolContext());
     return copy;
   }
 
@@ -206,6 +221,7 @@ public class DashscopeChatOptions implements FunctionCallingOptions,
         .ifPresent(copy::setRepetitionPenalty);
     Optional.ofNullable(options.getSeed())
         .ifPresent(copy::setSeed);
+    Optional.ofNullable(options.getToolContext()).ifPresent(copy::setToolContext);
     if (!CollectionUtils.isEmpty(options.getFunctions())) {
       copy.setFunctions(options.getFunctions());
     }
