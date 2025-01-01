@@ -10,10 +10,10 @@
 
 ## 版本
 
-| 客户端/模型版本 | Spring AI 版本 |
-|----------|--------------|
-| `1.1.x`  | `0.8.1`      |
-| `1.3.x`  | `1.0.0`      |
+| 客户端/模型版本   | Spring AI 版本 |
+|------------|--------------|
+| `1.1.x`    | `0.8.1`      |
+| `>= 1.3.x` | `1.0.0`      |
 
 > 需要阿里云模型服务灵积的 API Key，设置为环境变量 `DASHSCOPE_API_KEY`。
 
@@ -58,11 +58,9 @@ var response = model.call("hello");
 </dependency>
 ```
 
-会自动创建一个 `ChatModel` 类型的 Bean 和一个 `EmbeddingModel` 类型的
-Bean。默认的 `ChatOptions`
-可以通过配置项 `spring.ai.dashscope.chat.options`
-来配置。默认的 `EmbeddingOptions`
-可以通过配置项 `spring.ai.dashscope.embedding.options` 来配置。
+会自动创建一个 `ChatModel` 类型的 Bean 和一个 `EmbeddingModel` 类型的 Bean。默认的 `ChatOptions`
+可以通过配置项 `spring.ai.dashscope.chat.options` 来配置。默认的 `EmbeddingOptions` 可以通过配置项
+`spring.ai.dashscope.embedding.options` 来配置。
 
 ```yaml
 spring:

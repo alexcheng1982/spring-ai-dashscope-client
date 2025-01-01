@@ -13,7 +13,7 @@ Aliyun Dashscope Model for Spring AI
 | Client/Model version | Spring AI version |
 |----------------------|-------------------|
 | `1.1.x`              | `0.8.1`           |
-| `1.3.x`              | `1.0.0`           |
+| `>= 1.3.x`           | `1.0.0`           |
 
 > An Aliyun Dashscope API key is required. The key is set as environment
 > variable `DASHSCOPE_API_KEY`.
