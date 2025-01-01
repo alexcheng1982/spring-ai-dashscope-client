@@ -15,9 +15,9 @@ import io.github.alexcheng1982.springai.dashscope.api.DashscopeModelName;
 import java.util.List;
 import java.util.function.Function;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.model.function.DefaultFunctionCallbackBuilder;
 import org.springframework.ai.model.function.FunctionCallback;
-import org.springframework.ai.model.function.FunctionCallbackContext;
-import org.springframework.ai.model.function.FunctionCallbackWrapper;
+import org.springframework.ai.model.function.FunctionCallbackResolver;
 
 public class FunctionExampleMain {
 
@@ -37,7 +37,7 @@ public class FunctionExampleMain {
     }
   }
 
-  static class SimpleFunctionCallbackContext extends FunctionCallbackContext {
+  static class SimpleFunctionCallbackContext implements FunctionCallbackResolver {
 
     private final FunctionCallback functionCallback;
 
@@ -46,8 +46,7 @@ public class FunctionExampleMain {
     }
 
     @Override
-    public FunctionCallback getFunctionCallback(String beanName,
-        String defaultDescription) {
+    public FunctionCallback resolve(String name) {
       return functionCallback;
     }
   }
@@ -80,9 +79,8 @@ public class FunctionExampleMain {
         .build();
     var tool = new AddFunctionTool();
     var context = new SimpleFunctionCallbackContext(
-        FunctionCallbackWrapper.builder(tool)
-            .withName("add")
-            .withDescription("add two numbers")
+        new DefaultFunctionCallbackBuilder().function("add", tool)
+            .description("add two numbers")
             .build());
     var model = new DashscopeChatModel(new DashscopeApi(), context);
     var response = model.call(new Prompt("add 100 to 200", options));
