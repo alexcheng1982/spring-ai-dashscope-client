@@ -81,6 +81,7 @@ public class FunctionExampleMain {
     var context = new SimpleFunctionCallbackContext(
         new DefaultFunctionCallbackBuilder().function("add", tool)
             .description("add two numbers")
+            .inputType(AddRequest.class)
             .build());
     var model = new DashscopeChatModel(new DashscopeApi(), context);
     var response = model.call(new Prompt("add 100 to 200", options));
