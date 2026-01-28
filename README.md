@@ -2,6 +2,10 @@
 
 [English](./README.md) | [中文](./README_zh_CN.md)
 
+> [!CAUTION]
+> This repo is no longer maintained. Aliyun Dashscope supports OpenAI compatible API. Use the official OpenAI client instead.
+
+
 Aliyun Dashscope Model for Spring AI
 
 [![build](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml/badge.svg)](https://github.com/JavaAIDev/spring-ai-dashscope-client/actions/workflows/build.yaml)
